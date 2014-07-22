@@ -6,7 +6,7 @@ RUN echo '[program:httpd]'             >> /etc/supervisord.conf
 RUN echo 'command=service httpd start' >> /etc/supervisord.conf
 
 # install java
-RUN yum install -y java-1.7.0-openjdk.x86_64
+RUN yum install -y java-1.7.0-openjdk
 
 # install Elasticsearch
 # http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/setup-repositories.html#_yum
@@ -16,8 +16,17 @@ RUN yum install -y elasticsearch
 RUN echo '[program:elasticsearch]'             >> /etc/supervisord.conf
 RUN echo 'command=service elasticsearch start' >> /etc/supervisord.conf
 
+# install fluentd
+ADD treasuredata.repo /etc/yum.repos.d/
+RUN yum install -y td-agent
+RUN echo '[program:td-agent]'             >> /etc/supervisord.conf
+RUN echo 'command=service td-agent start' >> /etc/supervisord.conf
+
+# install fluent-plugin-elasticsearch
+RUN yum install -y libcurl-devel
+RUN /usr/lib64/fluent/ruby/bin/gem install fluent-plugin-elasticsearch
+
 # install Kibana
-RUN yum install -y wget tar
 WORKDIR /opt
 RUN wget https://download.elasticsearch.org/kibana/kibana/kibana-3.1.0.tar.gz
 RUN tar xzvf kibana-3.1.0.tar.gz
@@ -31,4 +40,6 @@ EXPOSE 22
 EXPOSE 80
 # Elasticsearch
 EXPOSE 9200
+# fluentd
+EXPOSE 24224
 
