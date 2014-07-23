@@ -19,6 +19,8 @@ RUN echo 'command=service elasticsearch start' >> /etc/supervisord.conf
 # install fluentd
 ADD treasuredata.repo /etc/yum.repos.d/
 RUN yum install -y td-agent
+RUN mv -f /etc/td-agent/td-agent.conf /etc/td-agent/td-agent.conf.org
+ADD td-agent.conf /etc/td-agent/
 RUN echo '[program:td-agent]'             >> /etc/supervisord.conf
 RUN echo 'command=service td-agent start' >> /etc/supervisord.conf
 
