@@ -16,6 +16,11 @@ RUN yum install -y elasticsearch
 RUN echo '[program:elasticsearch]'             >> /etc/supervisord.conf
 RUN echo 'command=service elasticsearch start' >> /etc/supervisord.conf
 
+# add Elasticsearch Index Template
+# http://qiita.com/harukasan/items/4ec517d8d96f557367e1
+RUN mkdir /etc/elasticsearch/templates/
+ADD dynamic_template.json /etc/elasticsearch/templates/
+
 # install fluentd
 ADD treasuredata.repo /etc/yum.repos.d/
 RUN yum install -y td-agent
