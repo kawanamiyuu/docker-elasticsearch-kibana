@@ -9,10 +9,8 @@ RUN echo 'command=service httpd start' >> /etc/supervisord.conf
 RUN yum install -y java-1.7.0-openjdk
 
 # install Elasticsearch
-# http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/setup-repositories.html#_yum
-ADD elasticsearch.repo /etc/yum.repos.d/
-RUN rpm --import http://packages.elasticsearch.org/GPG-KEY-elasticsearch
-RUN yum install -y elasticsearch
+RUN wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.3.4.noarch.rpm
+RUN rpm -ivh elasticsearch-1.3.4.noarch.rpm
 RUN echo '[program:elasticsearch]'             >> /etc/supervisord.conf
 RUN echo 'command=service elasticsearch start' >> /etc/supervisord.conf
 
