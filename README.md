@@ -16,7 +16,7 @@ $ vagrant up
 
 ```bash
 # ssh into
-$ ssh root@192.168.33.10 -p 1022 # password: root
+$ ssh appuser@192.168.33.10 -p 10022 # password: appuser
 ```
 
 ## Sender Container
@@ -26,5 +26,5 @@ $ ssh root@192.168.33.10 -p 1022 # password: root
 
 ```bash
 # ssh into
-$ ssh root@192.168.33.10 -p 2022 # password: root
+$ ssh appuser@192.168.33.10 -p 20022 # password: appuser
 ```
