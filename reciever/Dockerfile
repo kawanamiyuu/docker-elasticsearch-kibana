@@ -22,8 +22,7 @@ RUN mkdir /etc/elasticsearch/templates/
 ADD dynamic_template.json /etc/elasticsearch/templates/
 
 # install fluentd
-ADD treasuredata.repo /etc/yum.repos.d/
-RUN yum install -y td-agent
+RUN curl -L http://toolbelt.treasuredata.com/sh/install-redhat.sh | bash
 RUN mv -f /etc/td-agent/td-agent.conf /etc/td-agent/td-agent.conf.org
 ADD td-agent.conf /etc/td-agent/
 RUN echo '[program:td-agent]'             >> /etc/supervisord.conf
