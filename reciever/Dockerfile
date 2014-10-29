@@ -31,10 +31,10 @@ RUN yum install -y libcurl-devel
 RUN /usr/lib64/fluent/ruby/bin/gem install fluent-plugin-elasticsearch
 
 # install Kibana
-RUN wget https://download.elasticsearch.org/kibana/kibana/kibana-3.1.0.tar.gz -O /opt/kibana-3.1.0.tar.gz
-RUN tar xzvf /opt/kibana-3.1.0.tar.gz -C /opt/
+RUN wget https://download.elasticsearch.org/kibana/kibana/kibana-3.1.1.tar.gz -O /opt/kibana-3.1.1.tar.gz
+RUN tar xzvf /opt/kibana-3.1.1.tar.gz -C /opt/
 RUN rm -rf /var/www/html
-RUN ln -s /opt/kibana-3.1.0 /var/www/html
+RUN ln -s /opt/kibana-3.1.1 /var/www/html
 
 # sshd
 EXPOSE 22
